@@ -3,7 +3,8 @@ X = load('dataset0.txt');
 covX = cov(X);
 corX = corrcoef(X);
 
-Y = (X - min(X))./(max(X)-min(X));
+centeredX = bsxfun(@minus, X, min(X));
+Y = bsxfun(@times, centeredX, 1./max(centeredX));
 covY = cov(Y);
 corY = corrcoef(Y);
 
