@@ -30,5 +30,5 @@ plot(points(~isIn, 1), points(~isIn, 2), 'k.');
 title(sprintf('%d points outside f(x, 3) = 0', nnz(~isIn)))
 xlabel('x_1')
 ylabel('x_2', 'rot', 0)
-saveas(gcf, 'P2_1', 'epsc')
+saveas(gcf, 'P2_1', 'png')
 

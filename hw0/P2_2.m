@@ -34,7 +34,7 @@ imagesc(corY)
 title('Correlation coefficients of Y')
 colorbar
 
-saveas(gcf, 'P2_2a', 'epsc')
+saveas(gcf, 'P2_2a', 'png')
 
 figure('Color', 'w',...
        'Position', [10 10 800 600])
@@ -43,4 +43,4 @@ title(sprintf('Minimum correlation %f', minimumCorrelation))
 xlabel(sprintf('feature %d', feature1))
 ylabel(sprintf('feature %d', feature2))
 
-saveas(gcf, 'P2_2b', 'epsc')
+saveas(gcf, 'P2_2b', 'png')
