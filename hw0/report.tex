@@ -32,6 +32,13 @@ P(A \given B) &= \frac{P(B \given A)\cdot P(A)}{P(B \given A)\cdot P(A)+P(B \giv
 meaning a patient who tests positive for cancer has less than $1\%$ chance of actually having it.
 
 \subsection{Correlation and indepedence}
+Taking advantage of the fact that the odd moments of $X$ are 0, the covariance of $X$ and $Y=X^2$ is
+\begin{align*}
+	cov(X, Y) &= E\left(\left(X-E(X)\right)\left(Y-E(Y)\right)\right) \\
+	&=E\left(\left(X-0\right)\left(X^2-E(X^2)\right)\right) \\
+	&=E\left(X^3-XE(X^2)\right) \\
+	&=E(X^3)-E(X)E(X^2)=0 - 0E(X^2)=0.
+\end{align*}
 \clearpage
 \section{Practical problems}
 \subsection{Plotting normal distributed points}
@@ -39,7 +46,7 @@ meaning a patient who tests positive for cancer has less than $1\%$ chance of ac
   \begin{center}
     \includegraphics[width=\textwidth]{P2_1}
     \caption{}
-    \label{fig:}
+    \label{fig:P2_1}
   \end{center}
 \end{figure}
 \clearpage
@@ -48,14 +55,14 @@ meaning a patient who tests positive for cancer has less than $1\%$ chance of ac
   \begin{center}
     \includegraphics[width=\textwidth]{P2_2a}
     \caption{}
-    \label{fig:}
+    \label{fig:P2_2a}
   \end{center}
 \end{figure}
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{P2_2b}
     \caption{}
-    \label{fig:}
+    \label{fig:P2_2b}
   \end{center}
 \end{figure}
 
