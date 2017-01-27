@@ -13,4 +13,7 @@ function [mu, sigma] = sge(x)
 % sigma : Estimated standard deviation of the dataset (number)                 
 %
 
-YOUR CODE GOES HERE
+[n, p] = size(x);
+mu = sum(x) / n;
+centeredx = bsxfun(@minus, x, mu);
+sigma = sqrt(sum(centeredx(:) .^ 2)/n);
