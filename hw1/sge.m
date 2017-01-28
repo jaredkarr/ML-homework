@@ -18,3 +18,4 @@ centeredx = bsxfun(@minus, x, mu);
 sigma = sqrt(sum(centeredx(:) .^ 2)/n);
 
 end
+

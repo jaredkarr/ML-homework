@@ -12,55 +12,56 @@
 \DeclareMathOperator{\given}{\mid}
 
 \begin{document}
-	
-	\section*{HW1}
-	
-	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } lll}
-		Jimmy Hold\"{o} & & Jared Karr\\
-		890130-6319 & & 801120-4693\\
-		\it{gusholji@student.gu.se} & & \it{karr@student.chalmers.se}\\
-	\end{tabular*}
-	
-	\section{Theoretical problems}
-	\subsection{Maximum likelihood estimator (MLE)}
-	The likelihood of a set of observations $\mathbf{x_1},\dots,\mathbf{x_n}\in\mathbb{R}^p$ drawn I.I.D. from a $p$-dimensional spherical Gaussian distribution having mean $\boldsymbol\mu\in\mathbb{R}^p$ and variance $\sigma^2\in\mathbb{R}_{>0}$ is
-	\begin{align*}
-	P(\mathbf{x_1},\dots,\mathbf{x_n}\given \boldsymbol\mu,\sigma^2)
-	&=\prod_{i=1}^n\mathcal{N}(\mathbf{x_i}\given \boldsymbol\mu, \sigma^2)\\
-	&=\prod_{i=1}^n\left(
-	\frac{1}{\sqrt{2\pi}^p\sigma}
-	\right)\exp\left(
-	\frac{-(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)}
-	{2\sigma^2}
-	\right).
-	\end{align*}
-	To find $\sigma_\textrm{MLE}$, it is easier to maximize the log-likelihood
-	\begin{equation*}
-	\log P(\mathbf{x_1},\dots,\mathbf{x_n}\given\boldsymbol\mu,\sigma^2)
-	=\sum_{i=1}^n
-	-p\log\sqrt{2\pi}
-	-\log\sigma
-	-\frac{(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)}{2\sigma^2} 
-	\end{equation*}
-	with respect to $\sigma$. Taking the appropriate partial derivative and setting to zero,
-	\begin{align*}
-	\frac{\partial\log P}{\partial\sigma}
-	&=\sum_{i=1}^n
-	-\frac{1}{\sigma}
-	+\frac{1}{\sigma^3}\cdot(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)\\
-	&=-\frac{n}{\sigma}
-	+\frac{1}{\sigma^3}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)=0\\
-	n\sigma^2
-	&=\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)\\
-	\sigma_\textrm{MLE}&=\sqrt{\frac{1}{n}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
-	\end{align*}
-	\subsection{Posterior distributions}
-	\section{Practical problems}
-	\subsection{Spherical Gaussian estimation}
-	\paragraph{(a)}
-	\begin{align*}
-	\boldsymbol\mu_\textrm{MLE}&=\frac{1}{n}\sum_{i=1}^n\mathbf{x_i}\\
-	\sigma_\textrm{MLE}&=\sqrt{\frac{1}{n}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
-	\end{align*}
-	\subsection{MAP estimation}
+
+\section*{HW1}
+
+\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } lll}
+Jimmy Hold\"{o} & & Jared Karr\\
+890130-6319 & & 801120-4693\\
+\it{gusholji@student.gu.se} & & \it{karr@student.chalmers.se}\\
+\end{tabular*}
+
+\section{Theoretical problems}
+\subsection{Maximum likelihood estimator (MLE)}
+The likelihood of a set of observations $\mathbf{x_1},\dots,\mathbf{x_n}\in\mathbb{R}^p$ drawn I.I.D. from a $p$-dimensional spherical Gaussian distribution having mean $\boldsymbol\mu\in\mathbb{R}^p$ and variance $\sigma^2\in\mathbb{R}_{>0}$ is
+\begin{align*}
+  P(\mathbf{x_1},\dots,\mathbf{x_n}\given \boldsymbol\mu,\sigma^2)
+    &=\prod_{i=1}^n\mathcal{N}(\mathbf{x_i}\given \boldsymbol\mu, \sigma^2)\\
+    &=\prod_{i=1}^n\left(
+        \frac{1}{\sqrt{2\pi}^p\sigma}
+      \right)\exp\left(
+        \frac{-(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)}
+             {2\sigma^2}
+      \right).
+\end{align*}
+To find $\sigma_\textrm{MLE}$, it is easier to maximize the log-likelihood
+\begin{equation*}
+  \log P(\mathbf{x_1},\dots,\mathbf{x_n}\given\boldsymbol\mu,\sigma^2)
+    =\sum_{i=1}^n
+      -p\log\sqrt{2\pi}
+      -\log\sigma
+      -\frac{(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)}{2\sigma^2} 
+\end{equation*}
+with respect to $\sigma$. Taking the appropriate partial derivative and setting to zero,
+\begin{align*}
+\frac{\partial\log P}{\partial\sigma}
+  &=\sum_{i=1}^n
+    -\frac{1}{\sigma}
+    +\frac{1}{\sigma^3}\cdot(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)\\
+  &=-\frac{n}{\sigma}
+    +\frac{1}{\sigma^3}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)=0\\
+n\sigma^2
+  &=\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)\\
+\sigma_\textrm{MLE}&=\sqrt{\frac{1}{n}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
+\end{align*}
+\subsection{Posterior distributions}
+\section{Practical problems}
+\subsection{Spherical Gaussian estimation}
+\paragraph{(a)}
+\begin{align*}
+\boldsymbol\mu_\textrm{MLE}&=\frac{1}{n}\sum_{i=1}^n\mathbf{x_i}\\
+\sigma_\textrm{MLE}&=\sqrt{\frac{1}{n}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
+\end{align*}
+\subsection{MAP estimation}
 \end{document}
+
