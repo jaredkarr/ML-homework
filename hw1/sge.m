@@ -15,12 +15,6 @@ function [mu, sigma] = sge(x)
 [n, p] = size(x);
 mu = sum(x) / n;
 centeredx = bsxfun(@minus, x, mu);
-<<<<<<< HEAD
-variance = centeredx' * centeredx;
-sigma = sqrt(sum(variance(:))/n/p);
-=======
-sigma = sqrt(sum(centeredx(:) .^ 2)/n);
+sigma = sqrt(sum(centeredx(:).^2)/n/p);
 
 end
-
->>>>>>> df3562eb6989d66ce7a86ee68e02a6063f2e4143
