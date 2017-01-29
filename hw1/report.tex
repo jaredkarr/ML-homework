@@ -28,8 +28,8 @@ The likelihood of a set of observations $\mathbf{x_1},\dots,\mathbf{x_n}\in\math
   P(\mathbf{x_1},\dots,\mathbf{x_n}\given \boldsymbol\mu,\sigma^2)
     &=\prod_{i=1}^n\mathcal{N}(\mathbf{x_i}\given \boldsymbol\mu, \sigma^2)\\
     &=\prod_{i=1}^n\left(
-        \frac{1}{\sqrt{2\pi}^p\sigma}
-      \right)\exp\left(
+        \frac{1}{\sqrt{2\pi}\sigma}
+      \right)^p\exp\left(
         \frac{-(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)}
              {2\sigma^2}
       \right).
@@ -39,20 +39,20 @@ To find $\sigma_\textrm{MLE}$, it is easier to maximize the log-likelihood
   \log P(\mathbf{x_1},\dots,\mathbf{x_n}\given\boldsymbol\mu,\sigma^2)
     =\sum_{i=1}^n
       -p\log\sqrt{2\pi}
-      -\log\sigma
+      -p\log\sigma
       -\frac{(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)}{2\sigma^2} 
 \end{equation*}
 with respect to $\sigma$. Taking the appropriate partial derivative and setting to zero,
 \begin{align*}
 \frac{\partial\log P}{\partial\sigma}
   &=\sum_{i=1}^n
-    -\frac{1}{\sigma}
+    -\frac{p}{\sigma}
     +\frac{1}{\sigma^3}\cdot(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)\\
-  &=-\frac{n}{\sigma}
+  &=-\frac{np}{\sigma}
     +\frac{1}{\sigma^3}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)=0\\
-n\sigma^2
+np\sigma^2
   &=\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)\\
-\sigma_\textrm{MLE}&=\sqrt{\frac{1}{n}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
+\sigma_\textrm{MLE}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
 \end{align*}
 \subsection{Posterior distributions}
 \section{Practical problems}
