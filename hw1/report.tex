@@ -55,6 +55,55 @@ np\sigma^2
 \sigma_\textrm{MLE}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
 \end{align*}
 \subsection{Posterior distributions}
+\paragraph{(a)}Bayes rule gives the posterior distribution
+\begin{align*}
+  P(s\given \mathbf{x_1},\dots,\mathbf{x_n};\alpha,\beta)
+    &=\frac{
+        P(\mathbf{x_1},\dots,\mathbf{x_n}\given s)P(s\given\alpha,\beta)
+      }{
+        \int_{s=0}^\infty P(\mathbf{x_1},\dots,\mathbf{x_n}\given s)P(s\given\alpha,\beta)\,ds
+      },
+\end{align*}
+but we can ignore the normalization constants of each distribution to simplify the expression:
+\begin{align*}
+  P(s\given \mathbf{x_1},\dots,\mathbf{x_n};\alpha,\beta)
+    &\propto P(\mathbf{x_1},\dots,\mathbf{x_n}\given s)P(s\given\alpha,\beta)\\
+    &\propto
+      \prod_{i=1}^n \left(
+        s^{-1}\exp\left(-\frac{(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)}{2s}\right)
+      \right)
+      \cdot
+      s^{-\alpha-1}\exp\left(-\frac{\beta}{s}\right)\\
+    &\propto
+      s^{-n-\alpha-1}
+      \exp\left(
+        \frac{
+          -\beta
+          -\frac{1}{2}\left(
+            \sum_{i=1}^n
+              (\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)
+          \right)
+        }{
+          s
+        }
+      \right)\\
+    &\propto
+      s^{-{\alpha+n}-1}
+      \exp\left(
+        \frac{
+          -(\beta+n\sigma_\textrm{MLE}^2)
+        }{
+          s
+        }
+      \right).
+\end{align*}
+Let $\alpha'=\alpha+n$ and $\beta'=\beta+n\sigma_\textrm{MLE}^2$, then the posterior distribution takes the same form as the prior:
+\begin{align*}
+P(s\given \mathbf{x_1},\dots,\mathbf{x_n};\alpha,\beta)
+  &=P(s\given\alpha',\beta')\\
+  &=\frac{{\beta'}^{\alpha'}}{\Gamma(\alpha')}s^{-\alpha'-1}\exp\left(\frac{-\beta'}{s}\right)
+\end{align*}
+\paragraph{(b)}
 \section{Practical problems}
 \subsection{Spherical Gaussian estimation}
 \paragraph{(a)}
@@ -62,5 +111,11 @@ np\sigma^2
 \boldsymbol\mu_\textrm{MLE}&=\frac{1}{n}\sum_{i=1}^n\mathbf{x_i}\\
 \sigma_\textrm{MLE}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
 \end{align*}
+\paragraph{(d)}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{P2_1}
+  \end{center}
+\end{figure}
 \subsection{MAP estimation}
 \end{document}
