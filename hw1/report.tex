@@ -34,7 +34,7 @@ The likelihood of a set of observations $\mathbf{x_1},\dots,\mathbf{x_n}\in\math
              {2\sigma^2}
       \right).
 \end{align*}
-To find $\sigma_\textrm{MLE}$, it is easier to maximize the log-likelihood
+To find $\sigma_\mathrm{MLE}$, it is easier to maximize the log-likelihood
 \begin{equation*}
   \log P(\mathbf{x_1},\dots,\mathbf{x_n}\given\boldsymbol\mu,\sigma^2)
     =\sum_{i=1}^n
@@ -52,10 +52,12 @@ with respect to $\sigma$. Taking the appropriate partial derivative and setting 
     +\frac{1}{\sigma^3}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)=0\\
 np\sigma^2
   &=\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu)^\top(\mathbf{x_i}-\boldsymbol\mu)\\
-\sigma_\textrm{MLE}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
+\sigma_\mathrm{MLE}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\mathrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\mathrm{MLE})}.
 \end{align*}
+
 \subsection{Posterior distributions}
-\paragraph{(a)}Bayes rule gives the posterior distribution
+
+\paragraph{(a)} Bayes rule gives the posterior distribution
 \begin{align*}
   P(s\given \mathbf{x_1},\dots,\mathbf{x_n};\alpha,\beta)
     &=\frac{
@@ -91,25 +93,95 @@ but we can ignore the normalization constants of each distribution to simplify t
       s^{-{\alpha+n}-1}
       \exp\left(
         \frac{
-          -(\beta+n\sigma_\textrm{MLE}^2)
+          -(\beta+n\sigma_\mathrm{MLE}^2)
         }{
           s
         }
       \right).
 \end{align*}
-Let $\alpha'=\alpha+n$ and $\beta'=\beta+n\sigma_\textrm{MLE}^2$, then the posterior distribution takes the same form as the prior:
+Let $\alpha'=\alpha+n$ and $\beta'=\beta+n\sigma_\mathrm{MLE}^2$, then the posterior distribution takes the same form as the prior:
 \begin{align*}
 P(s\given \mathbf{x_1},\dots,\mathbf{x_n};\alpha,\beta)
   &=P(s\given\alpha',\beta')\\
   &=\frac{{\beta'}^{\alpha'}}{\Gamma(\alpha')}s^{-\alpha'-1}\exp\left(\frac{-\beta'}{s}\right)
 \end{align*}
-\paragraph{(b)}
+
+\paragraph{(b)} The Bayes factor between models $M_A$ and $M_B$ is defined to be
+\begin{align*}
+\mathrm{BF}&=
+  \frac{
+    P(\mathbf{x_1},\dots,\mathbf{x_n}\given\alpha_A,\beta_A)
+  }{
+    P(\mathbf{x_1},\dots,\mathbf{x_n}\given\alpha_B,\beta_B)
+  }.
+\end{align*}
+From Bayes rule, we get
+\begin{align*}
+\mathrm{BF}&=
+  \frac{
+    \frac{
+      P(\mathbf{x_1},\dots,\mathbf{x_n}\given s)P(s\given\alpha_A,\beta_A)      
+    }{
+      P(s\given\alpha_A',\beta_A')
+    }
+  }{
+    \frac{
+      P(\mathbf{x_1},\dots,\mathbf{x_n}\given s)P(s\given\alpha_B,\beta_B)      
+    }{
+      P(s\given\alpha_B',\beta_B')
+    }
+  }\\
+&=
+  \frac{
+    P(s\given\alpha_A,\beta_A)P(s\given\alpha_B',\beta_B')
+  }{
+    P(s\given\alpha_A',\beta_A')P(s\given\alpha_B,\beta_B)
+  }\\
+&=
+  \frac{
+    \beta_A^{\alpha_A}\beta_B'^{\alpha_B'}
+    \Gamma(\alpha_A')\Gamma(\alpha_B)
+  }{
+    \beta_A'^{\alpha_A'}\beta_B^{\alpha_B}
+    \Gamma(\alpha_A)\Gamma(\alpha_B')
+  }
+  \cdot
+  s^{\alpha_A'-\alpha_A+\alpha_B-\alpha_B'}
+  \exp\left(
+    \frac{
+      \beta_A'-\beta_A+\beta_B-\beta_B'
+    }{
+      s
+    }
+  \right)
+\end{align*}
+Note that the posterior models $(\alpha_A', \beta_A')$ and $(\alpha_B', \beta_B')$ incorporate the same evidence, so that
+\begin{align*}
+  \alpha_A'-\alpha_A+\alpha_B-\alpha_B'&=
+  \alpha_A+n-\alpha_A+\alpha_B-\alpha_B-n=0\\
+  \intertext{and}
+  \beta_A'-\beta_A+\beta_B-\beta_B'&=
+  \beta_A+n\sigma_\mathrm{MLE}^2-\beta_A+\beta_B-\beta_B-n\sigma_\mathrm{MLE}^2=0,
+\end{align*}
+causing the terms involving $s$ to disappear from the Bayes factor:
+\begin{align*}
+\mathrm{BF}&=
+  \frac{
+    \beta_A^{\alpha_A}\beta_B'^{\alpha_B'}
+    \Gamma(\alpha_A')\Gamma(\alpha_B)
+  }{
+    \beta_A'^{\alpha_A'}\beta_B^{\alpha_B}
+    \Gamma(\alpha_A)\Gamma(\alpha_B')
+  }
+\end{align*}
+\paragraph{(c)}
+
 \section{Practical problems}
 \subsection{Spherical Gaussian estimation}
 \paragraph{(a)}
 \begin{align*}
-\boldsymbol\mu_\textrm{MLE}&=\frac{1}{n}\sum_{i=1}^n\mathbf{x_i}\\
-\sigma_\textrm{MLE}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\textrm{MLE})}.
+\boldsymbol\mu_\mathrm{MLE}&=\frac{1}{n}\sum_{i=1}^n\mathbf{x_i}\\
+\sigma_\mathrm{MLE}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\mathrm{MLE})^\top(\mathbf{x_i}-\boldsymbol\mu_\mathrm{MLE})}.
 \end{align*}
 \paragraph{(d)}
 \begin{figure}
