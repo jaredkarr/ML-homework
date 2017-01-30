@@ -19,6 +19,7 @@ invgamma = @(s, a, b) exp(a * log(b)-gammaln(a)-(a+1)*log(s)-b./s);
 
 s = linspace(0, 1.5, 800);
 hold on
+fig1 = figure(1)
 plot(s, invgamma(s, alphaA, betaA))
 plot(s, invgamma(s, alphaApost, betaApost))
 plot(s, invgamma(s, alphaB, betaB))
@@ -32,3 +33,8 @@ bayesFactor = exp(n * (log(sB) - log(sA) + sMLE / sB - sMLE / sA))
 
 % posterior probability that model A is the "true" model
 pMA = bayesFactor / (1 + bayesFactor)
+
+t = sprintf('Map estimation with posterior probability that \nmodel A is the "true" model = %1.4f', pMA);
+title(t)
+
+saveas(fig1, 'P2_2', 'png')
