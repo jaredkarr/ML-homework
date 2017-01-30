@@ -39,4 +39,4 @@ pMA = bayesFactor / (1 + bayesFactor)
 
 
 saveas(fig1, 'P2_2a', 'png')
-saveas(fig2, 'P2_2b', 'png')
+saveas(fig1, 'P2_2b', 'png')
