@@ -257,6 +257,7 @@ The Bayes factor indicates the relative agreement between each model's MAP estim
 s_A&=s_\mathrm{\scriptscriptstyle{MLE}}.  
 \end{align*}
 That is, the Bayes factor is maximized in favor of $M_A$ when its MAP estimate and the MLE estimate are equal and likewise for $M_B$ by symmetry. 
+\clearpage
 \section{Practical problems}
 \subsection{Spherical Gaussian estimation}
 \paragraph{(a)}
@@ -265,26 +266,29 @@ That is, the Bayes factor is maximized in favor of $M_A$ when its MAP estimate a
 \sigma_\mathrm{\scriptscriptstyle{MLE}}&=\sqrt{\frac{1}{np}\sum_{i=1}^n(\mathbf{x_i}-\boldsymbol\mu_\mathrm{\scriptscriptstyle{MLE}})^\top(\mathbf{x_i}-\boldsymbol\mu_\mathrm{\scriptscriptstyle{MLE}})}.
 \end{align*}
 
-\begin{figure}[h!]
+\begin{figure}[!h]
   \begin{center}
     \includegraphics[width=\textwidth]{P2_1}
   \end{center}
 \end{figure}
+
+\clearpage
 \subsection{MAP estimation}
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{P2_2a}
+	\end{center}
+\end{figure}
+\begin{figure}[!hb]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{P2_2b}
+	\end{center}
+\end{figure}
+\clearpage
 \paragraph{(a)}
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=\textwidth]{P2_2a}
-	\end{center}
-\end{figure}
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=\textwidth]{P2_2b}
-	\end{center}
-\end{figure}
-dscs
+The prior models are very different, but the posterior models are nearly equal. The evidence is strong enough that the posterior models begin to converge.
 \paragraph{(b)}
-The value for model A is 0.3457 and the value for model B is 0.3426\\
+The MAP estimate for model A is $\sigma^2=0.3457$ and for model B is $\sigma^2=0.3426$. The MLE estimate based on the data is $\sigma^2=0.3454$\\
 \paragraph{(c)}
-Posterior probability that model A is the "true" model is 0.5080\\
+Posterior probability that model A is the "true" model is 0.5080, so there is no significant difference between the posterior models given the 1000 data points in the evidence.\\
 \end{document}

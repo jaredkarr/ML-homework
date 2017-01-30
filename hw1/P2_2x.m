@@ -18,15 +18,28 @@ betaBpost = betaB + n * sMLE;
 invgamma = @(s, a, b) exp(a * log(b)-gammaln(a)-(a+1)*log(s)-b./s);
 
 s = linspace(0, 1.5, 800);
+fig1 = figure('Color', 'w',...
+              'Position', [10 10 800 600])
 hold on
-fig1 = figure(1)
+set(gca, 'box', 'on')
 plot(s, invgamma(s, alphaA, betaA))
 plot(s, invgamma(s, alphaApost, betaApost))
+legend('prior', 'posterior')
+xlabel('\sigma^2')
+ylabel('p(\sigma^2)', 'rot', 0)
+title('Model A')
 
-fig2 = figure(2)
-plot(s, invgamma(s, alphaB, betaB))
+fig2 = figure('Color', 'w',...
+              'Position', [10 10 800 600])
 hold on
+set(gca, 'box', 'on')
+plot(s, invgamma(s, alphaB, betaB))
 plot(s, invgamma(s, alphaBpost, betaBpost))
+legend('prior', 'posterior')
+legend('prior', 'posterior')
+xlabel('\sigma^2')
+ylabel('p(\sigma^2)', 'rot', 0)
+title('Model B')
 
 % MAP estimates
 sA = betaApost / (alphaApost + 1)
