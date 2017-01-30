@@ -1,5 +1,6 @@
-## Temporary MATLAB files:
+## Temporary files:
 *.m~
+*.tex~
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
