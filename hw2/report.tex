@@ -22,10 +22,40 @@ Jimmy Hold\"{o} & & Jared Karr\\
 \end{tabular*}
 
 \section{Theoretical problems}
-\subsection{}
+\subsection{Bayes classifer}
+
+\begin{align*}
+P(x_{new}|t_{new}=k,\mathbf{X},\mathbf{t})=\prod_{d=1}^DP(x_d^{new}|t_{new}=k,\mathbf{X},\mathbf{t})
+\end{align*}
+\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } lll}
+P(rich|content)=$\frac{3}{4}$ & & P(not rich|content)=$\frac{1}{4}$\\
+P(married|content)=$\frac{2}{4}$ & & P(not married|content)=$\frac{2}{4}$\\
+P(healthy|content)=$\frac{3}{4}$ & & P(not healthy|content)=$\frac{1}{4}$\\
+
+P(rich|discontent)=$\frac{1}{4}$ & & P(not rich|discontent)=$\frac{3}{4}$\\
+P(married|discontent)=$\frac{1}{4}$ & & P(not married|discontent)=$\frac{3}{4}$\\
+P(healthy|discontent)=$\frac{1}{4}$ & & P(not healthy|discontent)=$\frac{3}{4}$\\
+P(content)=$\frac{1}{2}$ & & P(discontent)=$\frac{1}{2}$\\
+\end{tabular*}\\
+
+\begin{align*}
+P(t_{new}=k|x_{new},\mathbf{X},\mathbf{t})=\frac{p(x_{new}|t_{new}=k,\mathbf{X},\mathbf{t})p(t_{new}=k)}{\Sigma_jp(x_{new}|t_{new}=j,\mathbf{X},\mathbf{t})p(t_{new}=j)}
+\end{align*}
+
+\paragraph{a}
+\noindent P(not rich|content)*P(married|content)*P(healthy|content)*P(content) \\
+=$\frac{1}{4}$*$\frac{2}{4}$*$\frac{3}{4}$*$\frac{1}{2}$ = 0.046875\\
+
+\paragraph{b}
+
+\noindent P(not rich|content)*P(married|content)*P(healthy|content)*P(not healthy|content)*P(content) \\
+=$\frac{1}{4}$*$\frac{2}{4}$*$\frac{3}{4}$*$\frac{1}{4}$*$\frac{1}{2}$ = 0,01171875\\
+
+
+
 
 \subsection{}
-\section{Practical problems
+\section{Practical problems}
 \subsection{}
 
 \subsection{}
