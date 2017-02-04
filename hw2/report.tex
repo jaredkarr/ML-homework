@@ -69,6 +69,22 @@ P(x_3=1)&=1/2 &&& P(x_3=1\given c=1)&=3/4
 \end{align*}
 
 \subsection{Extending na\"ive Bayes}
+Features $x_1$, $x_2$, and $x_3$ are not independent. In fact, they are strictly dependent upon each other. The na\"ive Bayes method can be applied to the same data by changing the feature definition:
+\begin{align*}
+  x_{123} &= \left\{
+    \begin{matrix*}[l]
+      0, & & \textrm{if customer is younger than 20}\\
+      1, & & \textrm{if customer is between 20 and 30}\\
+      2, & & \textrm{if customer is older than 30}
+    \end{matrix*}
+  \right.\\
+  x_4 &= \left\{
+    \begin{matrix*}[l]
+      0, & & \textrm{if customer does not walk to work}\\
+      1, & & \textrm{otherwise}
+    \end{matrix*}
+  \right.
+\end{align*}
 \section{Practical problems}
 \subsection{}
 
