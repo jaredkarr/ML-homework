@@ -7,7 +7,6 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{mathtools}
-\usepackage{epstopdf}
 
 \DeclareMathOperator{\given}{\mid}
 
@@ -23,38 +22,53 @@ Jimmy Hold\"{o} & & Jared Karr\\
 
 \section{Theoretical problems}
 \subsection{Bayes classifer}
-
+We observe the following probabilities:
 \begin{align*}
-P(x_{new}|t_{new}=k,\mathbf{X},\mathbf{t})=\prod_{d=1}^DP(x_d^{new}|t_{new}=k,\mathbf{X},\mathbf{t})
-\end{align*}
-\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } lll}
-P(rich|content)=$\frac{3}{4}$ & & P(not rich|content)=$\frac{1}{4}$\\
-P(married|content)=$\frac{2}{4}$ & & P(not married|content)=$\frac{2}{4}$\\
-P(healthy|content)=$\frac{3}{4}$ & & P(not healthy|content)=$\frac{1}{4}$\\
-
-P(rich|discontent)=$\frac{1}{4}$ & & P(not rich|discontent)=$\frac{3}{4}$\\
-P(married|discontent)=$\frac{1}{4}$ & & P(not married|discontent)=$\frac{3}{4}$\\
-P(healthy|discontent)=$\frac{1}{4}$ & & P(not healthy|discontent)=$\frac{3}{4}$\\
-P(content)=$\frac{1}{2}$ & & P(discontent)=$\frac{1}{2}$\\
-\end{tabular*}\\
-
-\begin{align*}
-P(t_{new}=k|x_{new},\mathbf{X},\mathbf{t})=\frac{p(x_{new}|t_{new}=k,\mathbf{X},\mathbf{t})p(t_{new}=k)}{\Sigma_jp(x_{new}|t_{new}=j,\mathbf{X},\mathbf{t})p(t_{new}=j)}
+&&P(c=1)&=1/2 & &\\
+P(x_1=0)&=1/2 &&& P(x_1=0\given c=1)&=1/4\\
+P(x_2=1)&=3/8 &&& P(x_2=1\given c=1)&=1/2\\
+P(x_3=1)&=1/2 &&& P(x_3=1\given c=1)&=3/4
 \end{align*}
 
-\paragraph{a}
-\noindent P(not rich|content)*P(married|content)*P(healthy|content)*P(content) \\
-=$\frac{1}{4}$*$\frac{2}{4}$*$\frac{3}{4}$*$\frac{1}{2}$ = 0.046875\\
+\paragraph{(a)}
+\begin{align*}
+  P(c=1\given x=(0, 1, 1))
+  &=\frac{
+    P(x_1=0\given c=1)
+    P(x_2=1\given c=1)
+    P(x_3=1\given c=1)
+    P(c=1)
+  }{
+    P(x_1=0)
+    P(x_2=1)
+    P(x_3=1)
+  }\\
+  &=\frac{
+    (1/4)(1/2)(3/4)(1/2)
+  }{
+    (1/2)(3/8)(1/2)
+  }=1/2
+\end{align*}
 
-\paragraph{b}
+\paragraph{(b)}
+\begin{align*}
+  P(c=1\given x=(0, 1, 1))
+  &=\frac{
+    P(x_1=0\given c=1)
+    P(x_2=1\given c=1)
+    P(c=1)
+  }{
+    P(x_1=0)
+    P(x_2=1)
+  }\\
+  &=\frac{
+    (1/4)(1/2)(1/2)
+  }{
+    (1/2)(3/8)
+  }=1/3
+\end{align*}
 
-\noindent P(not rich|content)*P(married|content)*P(healthy|content)*P(not healthy|content)*P(content) \\
-=$\frac{1}{4}$*$\frac{2}{4}$*$\frac{3}{4}$*$\frac{1}{4}$*$\frac{1}{2}$ = 0,01171875\\
-
-
-
-
-\subsection{}
+\subsection{Extending na\"ive Bayes}
 \section{Practical problems}
 \subsection{}
 
