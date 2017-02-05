@@ -3,6 +3,5 @@ function [ Ytest ] = new_classifier( Xtest, mu1, mu2 )
 %   Detailed explanation goes here
 
 b = 1/2*(mu1+mu2);
-Ytest = sign((mu1-mu2)*(Xtest-b)'/(norm(mu1-mu2)^2));
+Ytest = sign(bsxfun(@minus, Xtest, b)*(mu1-mu2)');
 end
-

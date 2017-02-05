@@ -1,12 +1,35 @@
 clear, clc
+load dataset2
+[N, D] = size(x);
 
-load('dataset2.mat');
-class1 = find(y==1);
-class2 = find(y==-1);
+numFolds = 5;
+foldIndex = repmat(1:5, ceil(N / numFolds), 1);
+foldIndex = foldIndex(randperm(N));
 
-[mu1,sigma1] = sge(x(class1,:));
-[mu2,sigma2] = sge(x(class2,:));
+class1 = y == 1;
+class2 = y == -1;
 
-mu=[mu1;mu2];
-sigma = [sigma1;sigma2];
+sphBayesErrors = 0;
+newClassifierErrors = 0;
 
+for fold = 1:numFolds
+  validate = foldIndex(:) == fold;
+  train = ~validate;
+
+  [mu1, sigma1] = sge(x(class1 & train, :));
+  [mu2, sigma2] = sge(x(class2 & train, :));
+
+  [~, ~, sphBayesY] = sph_bayes(x(validate, :), mu1, mu2, sigma1, sigma2);
+  newClassifierY = new_classifier(x(validate, :), mu1, mu2);
+
+  sphBayesErrors = sphBayesErrors + sum(sphBayesY ~= y(validate));
+  newClassifierErrors = newClassifierErrors + sum(newClassifierY ~= y(validate));
+end
+
+sphBayesErrors
+newClassifierErrors
+
+
+
+%mu=[mu1;mu2];
+%sigma = [sigma1;sigma2];
