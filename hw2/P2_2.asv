@@ -21,10 +21,11 @@ foldIndex = repmat(1:numFolds, ceil(N/numFolds), 1);
 foldIndex = foldIndex(randperm(N));
 
 errors = 0;
-errorarr = [];
-errorarr1 = [];
+errorarr = []
+errorarr1 = []
 errorsvar = 0;
 errorscomb = 0;
+y
 
 for fold = 1:numFolds
   validate = foldIndex(:) == fold;
@@ -43,6 +44,7 @@ for fold = 1:numFolds
   Ytestvar = new_classifier(xvar(validate, :), muvar1, muvar2);
   errorsvar = errorsvar + sum(Ytestvar ~= y(validate));
   errorarr1 = [errorarr1 sum(Ytestvar ~= y(validate))];
+  Ytestvar ~= y(validate)
 
   [mucomb1, ~] = sge(xcomb(y==1 & train, :));
   [mucomb2, ~] = sge(xcomb(y==-1 & train, :));
@@ -55,7 +57,7 @@ end
 errors
 errorsvar
 errorscomb
-errorarr./length(Ytest)
-errorarr1./length(Ytestvar)
-err = sum(errorarr./length(Ytest))/5
-err1 = sum(errorarr1./length(Ytestvar))/5
+errorarr./errors
+errorarr1./errorsvar
+err = sum(errorarr./errors)/5
+err1 = sum(errorarr1./errorsvar)/5

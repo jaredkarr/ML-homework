@@ -21,7 +21,7 @@ for fold = 1:numFolds
 
   [~, ~, sphBayesY] = sph_bayes(x(validate, :), mu1, mu2, sigma1, sigma2);
   newClassifierY = new_classifier(x(validate, :), mu1, mu2);
-
+  
   sphBayesErrors = sphBayesErrors + sum(sphBayesY ~= y(validate));
   newClassifierErrors = newClassifierErrors + sum(newClassifierY ~= y(validate));
 end
