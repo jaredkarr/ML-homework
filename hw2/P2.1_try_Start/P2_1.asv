@@ -11,7 +11,8 @@ class2 = y == -1;
 
 sphBayesErrors = 0;
 newClassifierErrors = 0;
-
+sphBayesErrorsArr = [];
+newClassifierErrorsArr = [];
 for fold = 1:numFolds
   validate = foldIndex(:) == fold;
   train = ~validate;
@@ -24,10 +25,15 @@ for fold = 1:numFolds
   
   sphBayesErrors = sphBayesErrors + sum(sphBayesY ~= y(validate));
   newClassifierErrors = newClassifierErrors + sum(newClassifierY ~= y(validate));
+  sphBayesErrorsArr = [sphBayesErrorsArr  sphBayesY];
+  newClassifierErrorsArr = [newClassifierErrorsArr newClassifierY];
 end
 
 sphBayesErrors
 newClassifierErrors
+sphBayesErrorsArr
+  newClassifierErrorsArr
+
 
 
 %mu=[mu1;mu2];
