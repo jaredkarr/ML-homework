@@ -7,26 +7,70 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{mathtools}
-\usepackage{epstopdf}
+\usepackage{bm}
 
 \DeclareMathOperator{\given}{\mid}
 
 \begin{document}
+	
+	\section*{HW3}
+	
+	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } lll}
+		Jimmy Hold\"{o} & & Jared Karr\\
+		890130-6319 & & 801120-4693\\
+		\it{gusholji@student.gu.se} & & \it{karr@student.chalmers.se}\\
+	\end{tabular*}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Theoretical problems}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Topological properties}
+	\paragraph{(a)}
+	 The network that can be trained by backpropagation is network number 1.
+	\paragraph{(b)}
+	The topological properties a network must fulfill are that information only moves in one direction, forward, there are no cycles and loops and it requiers that the activiation function used by the neurons be differentiable.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Committee}
+	The activation function for the output is linear:	
+	\begin{align*}
+		y = g(\bm{w}^T\bm{x}) = c \bm{w}^T \bm{x}.
+	\end{align*}
+	
+	\noindent The two networks combined:
+	
+	\begin{align*}
+	 y &=g(\frac{1}{2} \bm{w}_1^T \bm{x}+\frac{1}{2} \bm{w}_2^{T} \bm{x})\\
+	 &= \frac{1}{2}g(\bm{w}_1^T \bm{x})+\frac{1}{2}g(\bm{w}_2^T \bm{x})\\ 
+	 &=	\frac{c}{2}\bm{w}_1^T\bm{x}+\frac{c}{2}\bm{w}_2^T\bm{x} \\ 
+	 &= \frac{c}{2}(\bm{w}_1^T+\bm{w}_2^T)\bm{x}\\ 
+	 &= c \bm{w}_3^T \bm{x} = g(\bm{w}_3^T\bm{x})
+	\end{align*}
+	
+	\noindent Weights for the new network:
+	\begin{align*}
+		\bm{w}_3^T=\frac{1}{2}(\bm{w}_1^T+\bm{w}_2^T)
+	\end{align*} 
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Backpropagation - shallow network}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Backpropagation}
+	\paragraph{(a)}
+	$\frac{\partial E}{\partial z_k} =\frac{\partial E}{\partial y_j} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} g(z_j)$
+	\paragraph{(b)}
+	$\frac{\partial E}{\partial y_j} =\frac{\partial E}{\partial z_k} \frac{dz_k}{dy_j} =
+	\frac{\partial E}{\partial z_k} \frac{\partial}{\partial y_j} w_{jk} y_j =\frac{\partial E}{\partial z_k} w_{jk}$\par
+	\setlength\parindent{1cm} $\frac{\partial E}{\partial z_j} = \frac{\partial E}{\partial y_j} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} g(z_j)$
+	\paragraph{(c)}
+	$\frac{\partial E}{\partial w_{jk}} = \frac{\partial E}{\partial z_k} \frac{dz_k}{dw_{jk}} = \frac{\partial E}{\partial y_k} g(z_k) \frac{d}{dw_{jk}} w_{jk}y_{j} = \frac{\partial E}{\partial y_k} g(z_k) \delta^j_k y_j$
+	\paragraph{(d)}
+	$\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial z_j} \frac{dz_j}{dw_{ij}} = \frac{\partial E}{\partial z_j} \frac{d}{dw_{ij}} w_{ij}y_i = \frac{\partial E}{\partial z_j} \delta^j_i y_i$\\
+	
+	\noindent Where $\delta$ is the delta function.
+	\section{Practical problems}
 
-\section*{HW3}
-
-\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } lll}
-Jimmy Hold\"{o} & & Jared Karr\\
-890130-6319 & & 801120-4693\\
-\it{gusholji@student.gu.se} & & \it{karr@student.chalmers.se}\\
-\end{tabular*}
-
-\section{Theoretical problems}
-\subsection{}
-
-\subsection{}
-\section{Practical problems
-\subsection{}
-
-\subsection{}
+	
 \end{document}
