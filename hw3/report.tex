@@ -8,19 +8,20 @@
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{bm}
+\usepackage{cancel}
 
 \DeclareMathOperator{\given}{\mid}
 
 \begin{document}
-	
+
 	\section*{HW3}
-	
+
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } lll}
 		Jimmy Hold\"{o} & & Jared Karr\\
 		890130-6319 & & 801120-4693\\
 		\it{gusholji@student.gu.se} & & \it{karr@student.chalmers.se}\\
 	\end{tabular*}
-	
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Theoretical problems}
@@ -30,32 +31,32 @@
 	 The network that can be trained by backpropagation is network number 1.
 	\paragraph{(b)}
 	The topological properties a network must fulfill are that information only moves in one direction, forward, there are no cycles and loops and it requiers that the activiation function used by the neurons be differentiable.
-	
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Committee}
-	The activation function for the output is linear:	
+	The activation function for the output is linear:
 	\begin{align*}
 		y = g(\bm{w}^T\bm{x}) = c \bm{w}^T \bm{x}.
 	\end{align*}
-	
+
 	\noindent The two networks combined:
-	
+
 	\begin{align*}
 	 y &=g(\frac{1}{2} \bm{w}_1^T \bm{x}+\frac{1}{2} \bm{w}_2^{T} \bm{x})\\
-	 &= \frac{1}{2}g(\bm{w}_1^T \bm{x})+\frac{1}{2}g(\bm{w}_2^T \bm{x})\\ 
-	 &=	\frac{c}{2}\bm{w}_1^T\bm{x}+\frac{c}{2}\bm{w}_2^T\bm{x} \\ 
-	 &= \frac{c}{2}(\bm{w}_1^T+\bm{w}_2^T)\bm{x}\\ 
+	 &= \frac{1}{2}g(\bm{w}_1^T \bm{x})+\frac{1}{2}g(\bm{w}_2^T \bm{x})\\
+	 &=	\frac{c}{2}\bm{w}_1^T\bm{x}+\frac{c}{2}\bm{w}_2^T\bm{x} \\
+	 &= \frac{c}{2}(\bm{w}_1^T+\bm{w}_2^T)\bm{x}\\
 	 &= c \bm{w}_3^T \bm{x} = g(\bm{w}_3^T\bm{x})
 	\end{align*}
-	
+
 	\noindent Weights for the new network:
 	\begin{align*}
 		\bm{w}_3^T=\frac{1}{2}(\bm{w}_1^T+\bm{w}_2^T)
-	\end{align*} 
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\end{align*}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Backpropagation - shallow network}
-	
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Backpropagation}
 	\paragraph{(a)}
@@ -68,9 +69,76 @@
 	$\frac{\partial E}{\partial w_{jk}} = \frac{\partial E}{\partial z_k} \frac{dz_k}{dw_{jk}} = \frac{\partial E}{\partial y_k} g(z_k) \frac{d}{dw_{jk}} w_{jk}y_{j} = \frac{\partial E}{\partial y_k} g(z_k) \delta^j_k y_j$
 	\paragraph{(d)}
 	$\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial z_j} \frac{dz_j}{dw_{ij}} = \frac{\partial E}{\partial z_j} \frac{d}{dw_{ij}} w_{ij}y_i = \frac{\partial E}{\partial z_j} \delta^j_i y_i$\\
-	
+
 	\noindent Where $\delta$ is the delta function.
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Practical problems}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Backpropagation on paper}
+  The network can be written as
+  \begin{align*}
+    \tag{input layer}
+      x_i\\
+    \tag{hidden layer weighting}
+      z_j&=\sum_iw_{ji}x_i\\
+    \tag{hidden layer activation}
+      y_j&=\frac{1}{1+e^{z_j}}\\
+    \tag{output layer weighting}
+      z_k&=\sum_jw_{kj}y_j\\
+    \tag{output layer normalization}
+      C&=\sum_ke^{z_k}\\
+    \tag{output layer activation}
+      y_k&=\frac{e^{z_k}}{C}\\
+    \tag{output target}
+      t_k
+  \end{align*}
+  and the error function as
+  \begin{align*}
+    \tag{classification error}
+      E_c &= -\sum_kt_k\log y_k=-\sum_kt_k(z_k-\log C) \\
+    \tag{weight decay error}
+      E_d &= \frac{1}{2}\sum_{i,j}w_{ji}^2 + \frac{1}{2}\sum_{j,k}w_{kj}^2\\
+    \tag{total error}
+      E &= E_c + \alpha E_d.
+  \end{align*}
+  The relevant gradients for backpropagation are
+  \begin{align*}
+    \tag{output activation}
+    \frac{\partial E}{\partial z_{k_0}} &= -t_{k_0}+(\sum_kt_k)\frac{\partial}{\partial z_{k_0}}\log C\\
+      &= -t_{k_0}+\frac{1}{C}\frac{\partial}{\partial z_{k_0}}C\\
+      &= -t_{k_0}+\frac{1}{C}e^{z_{k_0}} = -t_{k_0}+y_{k_0}\\
+\intertext{}
+    \tag{output weights}
+    \frac{\partial E}{\partial w_{kj}}
+      &= \frac{\partial E_c}{\partial z_k}\frac{\partial z_k}{\partial w_{kj}}+\frac{\partial E_d}{\partial w_{kj}}\\
+      &= \left(y_k-t_k\right)\cdot y_j + \alpha w_{kj}
+\intertext{}
+    \tag{hidden output}
+    \frac{\partial E}{\partial y_j}
+      &= \sum_k\left(\frac{\partial z_k}{\partial y_j}\cdot\frac{\partial E}{\partial z_k}\right)\\
+      &= \sum_kw_{kj}\cdot(y_k-t_k)
+\intertext{}
+    \tag{hidden activation}
+    \frac{\partial E}{\partial z_j}
+      &= \frac{\partial y_j}{\partial z_j}\cdot\frac{\partial E}{\partial y_j}\\
+      &= (-1)\left(\frac{1}{1+e^{z_j}}\right)^2e^{z_j}
+        \cdot\sum_kw_{kj}(y_k-t_k)\\
+      &= \frac{1}{1+e^{z_j}}\cdot\frac{-e^{z_j}}{1+e^{z_j}}
+        \cdot\sum_kw_{kj}(y_k-t_k)\\
+      &= y_j(y_j-1)\cdot\sum_kw_{kj}(y_k-t_k)\\
+\intertext{}
+    \tag{hidden weights}
+    \frac{\partial E}{\partial w_{ji}}
+      &= \frac{\partial E_d}{\partial w_{ji}} + \frac{\partial z_j}{\partial w_{ji}}\cdot\frac{\partial E_c}{\partial z_j}\\
+      &= \alpha w_{ji} + x_i\cdot y_j(y_j-1)\sum_kw_{kj}(y_k-t_k)
+  \end{align*}
+	\subsection{Backpropagation}
+  \subsection{Optimization}
+  \subsection{Generalization}
+
+
 
 
 \end{document}
