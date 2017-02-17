@@ -84,7 +84,7 @@
     \tag{hidden layer weighting}
       z_j&=\sum_iw_{ji}x_i\\
     \tag{hidden layer activation}
-      y_j&=\frac{1}{1+e^{z_j}}\\
+      y_j&=\frac{1}{1+e^{-z_j}}\\
     \tag{output layer weighting}
       z_k&=\sum_jw_{kj}y_j\\
     \tag{output layer normalization}
@@ -123,17 +123,21 @@
     \tag{hidden activation}
     \frac{\partial E}{\partial z_j}
       &= \frac{\partial y_j}{\partial z_j}\cdot\frac{\partial E}{\partial y_j}\\
-      &= (-1)\left(\frac{1}{1+e^{z_j}}\right)^2e^{z_j}
+      &= \left(\frac{1}{1+e^{-z_j}}\right)^2e^{-z_j}
         \cdot\sum_kw_{kj}(y_k-t_k)\\
-      &= \frac{1}{1+e^{z_j}}\cdot\frac{-e^{z_j}}{1+e^{z_j}}
+      &= \frac{1}{1+e^{z_j}}\cdot\frac{e^{z_j}}{1+e^{z_j}}
         \cdot\sum_kw_{kj}(y_k-t_k)\\
-      &= y_j(y_j-1)\cdot\sum_kw_{kj}(y_k-t_k)\\
+      &= y_j(1-y_j)\cdot\sum_kw_{kj}(y_k-t_k)\\
 \intertext{}
     \tag{hidden weights}
     \frac{\partial E}{\partial w_{ji}}
       &= \frac{\partial E_d}{\partial w_{ji}} + \frac{\partial z_j}{\partial w_{ji}}\cdot\frac{\partial E_c}{\partial z_j}\\
-      &= \alpha w_{ji} + x_i\cdot y_j(y_j-1)\sum_kw_{kj}(y_k-t_k)
+      &= \alpha w_{ji} + x_i\cdot y_j(1-y_j)\sum_kw_{kj}(y_k-t_k)
   \end{align*}
+The gradient is computed using the following code:
+\begin{verbatim}
+
+\end{verbatim}
 	\subsection{Backpropagation}
   \subsection{Optimization}
   \subsection{Generalization}

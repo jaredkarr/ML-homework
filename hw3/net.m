@@ -95,7 +95,7 @@ function res = theta_to_model(theta)
 end
 
 function res = cost(model, data, wd_coefficient)
-% The function runs the model on the supplied data and returns the cost.
+  % The function runs the model on the supplied data and returns the cost.
   % model.input_to_hid  Contains the weights from the input units to the hidden units.
   % model.hid_to_class  Contains the weights from the hidden units to the softmax units.
   % data.inputs         Each column corresponds to an input vector.
@@ -131,10 +131,20 @@ function res = grad(model, data, wd_coefficient)
   % class_prob is the model output.
 
   %% TODO - Write code here ---------------
+    [~,N] = size(data.inputs);
     wdpart.input_to_hid = model.input_to_hid * wd_coefficient;
     wdpart.hid_to_class = model.hid_to_class * wd_coefficient;
-    classpart.input_to_hid = 0;
-    classpart.hid_to_class = 0;
+
+    dEd_class_input = (class_prob - data.targets) / N;
+    classpart.hid_to_class = dEd_class_input * hid_output';
+    dEd_hid_output = model.hid_to_class' * dEd_class_input;
+    dEd_hid_input = hid_output .* (1 - hid_output) .* dEd_hid_output;
+    classpart.input_to_hid = dEd_hid_input * data.inputs';
+
+    %classpart.input_to_hid = 0;
+    %classpart.hid_to_class = 0;
+
+
 
     res.input_to_hid = classpart.input_to_hid + wdpart.input_to_hid;
     res.hid_to_class = classpart.hid_to_class + wdpart.hid_to_class;
