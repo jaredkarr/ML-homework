@@ -50,16 +50,16 @@ function net(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier,
   end
   % the optimization is finished. Now do some reporting.
   model = theta_to_model(theta);
-  if n_iters ~= 0,
-    clf;
-    hold on;
-    plot(training_data_losses, 'b');
-    plot(validation_data_losses, 'r');
-    legend('training', 'validation');
-    ylabel('cost');
-    xlabel('iteration number');
-    hold off;
-  end
+%  if n_iters ~= 0,
+%    clf;
+%    hold on;
+%    plot(training_data_losses, 'b');
+%    plot(validation_data_losses, 'r');
+%    legend('training', 'validation');
+%    ylabel('cost');
+%    xlabel('iteration number');
+%    hold off;
+%  end
   datas2 = {datas.training, datas.validation, datas.test};
   data_names = {'training', 'validation', 'test'};
   for data_i = 1:3,
@@ -136,21 +136,14 @@ function res = grad(model, data, wd_coefficient)
     wdpart.hid_to_class = model.hid_to_class * wd_coefficient;
 
     dEd_class_input = (class_prob - data.targets) / N;
-    classpart.hid_to_class = dEd_class_input * hid_output';
     dEd_hid_output = model.hid_to_class' * dEd_class_input;
     dEd_hid_input = hid_output .* (1 - hid_output) .* dEd_hid_output;
+
+    classpart.hid_to_class = dEd_class_input * hid_output';
     classpart.input_to_hid = dEd_hid_input * data.inputs';
-
-    %classpart.input_to_hid = 0;
-    %classpart.hid_to_class = 0;
-
-
 
     res.input_to_hid = classpart.input_to_hid + wdpart.input_to_hid;
     res.hid_to_class = classpart.hid_to_class + wdpart.hid_to_class;
-    % Right now the function just returns a lot of zeros. Your job is to change that.
-    % res.input_to_hid = model.input_to_hid * 0;
-    % res.hid_to_class = model.hid_to_class * 0;
   % ---------------------------------------
 end
 

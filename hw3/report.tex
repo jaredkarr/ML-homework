@@ -134,13 +134,50 @@
       &= \frac{\partial E_d}{\partial w_{ji}} + \frac{\partial z_j}{\partial w_{ji}}\cdot\frac{\partial E_c}{\partial z_j}\\
       &= \alpha w_{ji} + x_i\cdot y_j(1-y_j)\sum_kw_{kj}(y_k-t_k)
   \end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Backpropagation}
+
 The gradient is computed using the following code:
 \begin{verbatim}
+[~,N] = size(data.inputs);
+wdpart.input_to_hid = model.input_to_hid * wd_coefficient;
+wdpart.hid_to_class = model.hid_to_class * wd_coefficient;
 
+dEd_class_input = (class_prob - data.targets) / N;
+dEd_hid_output = model.hid_to_class' * dEd_class_input;
+dEd_hid_input = hid_output .* (1 - hid_output) .* dEd_hid_output;
+
+classpart.hid_to_class = dEd_class_input * hid_output';
+classpart.input_to_hid = dEd_hid_input * data.inputs';
+
+res.input_to_hid = classpart.input_to_hid + wdpart.input_to_hid;
+res.hid_to_class = classpart.hid_to_class + wdpart.hid_to_class;
 \end{verbatim}
-	\subsection{Backpropagation}
-  \subsection{Optimization}
-  \subsection{Generalization}
+The training cost when running \texttt{net(0.1, 7, 10, 0, 0, false, 4)} is 2.76838.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Optimization}
+
+The best results were achieved at learning rate $\lambda=0.2$ with momentum.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Generalization}
+\paragraph{(a)}
+The validation cost of \texttt{net(0, 200, 1000, 0.35, 0.9, false, 100)} is 0.43019.
+\paragraph{(b)}
+The validation cost of \texttt{net(0, 200, 1000, 0.35, 0.9, true, 100)} is 0.33451.
+\paragraph{(c)}
+The best result was achieved with weight decay $\alpha=0.001$, having a validation cost of 0.28791.
+\paragraph{(d)}
+The best result was achieved with 30 hidden units, having a validation cost of 0.31708.
+\paragraph{(e)}
+With early stopping, the best result was achieved with 37 hidden units, having a validation cost of 0.26517.
+\paragraph{(f)}
+The classification error rate for \texttt{net(0, 37, 1000, 0.35, 0.9, true, 100)} was 8.1\%.
+
+
+
 
 
 
