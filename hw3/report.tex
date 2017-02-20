@@ -56,6 +56,13 @@
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Backpropagation - shallow network}
+	The update to weight $w_i$ is
+	\begin{align*}
+		\Delta w_i &= -\lambda\frac{\partial E}{\partial w_i} \\
+		&= -\lambda \frac{\partial}{\partial w_i}\frac{1}{2}(t-y)^2\\
+		&= -\lambda (t-y)\frac{\partial y}{\partial w_i}\\
+		&= -\lambda (t-y)x_i
+	\end{align*}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Backpropagation}
