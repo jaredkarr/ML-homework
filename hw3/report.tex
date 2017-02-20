@@ -67,17 +67,20 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Backpropagation}
 	\paragraph{(a)}
-	$\frac{\partial E}{\partial z_k} =\frac{\partial E}{\partial y_j} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} g(z_j)$
-	\paragraph{(b)}
-	$\frac{\partial E}{\partial y_j} =\frac{\partial E}{\partial z_k} \frac{dz_k}{dy_j} =
-	\frac{\partial E}{\partial z_k} \frac{\partial}{\partial y_j} w_{jk} y_j =\frac{\partial E}{\partial z_k} w_{jk}$\par
-	\setlength\parindent{1cm} $\frac{\partial E}{\partial z_j} = \frac{\partial E}{\partial y_j} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} \frac{dy_j}{dz_j} = \frac{\partial E}{\partial y_k} g(z_k) w_{jk} g(z_j)$
-	\paragraph{(c)}
-	$\frac{\partial E}{\partial w_{jk}} = \frac{\partial E}{\partial z_k} \frac{dz_k}{dw_{jk}} = \frac{\partial E}{\partial y_k} g(z_k) \frac{d}{dw_{jk}} w_{jk}y_{j} = \frac{\partial E}{\partial y_k} g(z_k) \delta^j_k y_j$
-	\paragraph{(d)}
-	$\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial z_j} \frac{dz_j}{dw_{ij}} = \frac{\partial E}{\partial z_j} \frac{d}{dw_{ij}} w_{ij}y_i = \frac{\partial E}{\partial z_j} \delta^j_i y_i$\\
-
-	\noindent Where $\delta$ is the delta function.
+	\begin{align*}
+		\frac{\partial E}{\partial z_k} &= \frac{\partial y_k}{\partial z_k}\cdot\frac{\partial E}{\partial y_k}\\
+		&=g'(z_k)\frac{\partial E}{\partial y_k}\\
+\intertext{\textbf{(b)}}
+		\frac{\partial E}{\partial z_j} &= \frac{\partial y_j}{\partial z_j}\cdot\frac{\partial E}{\partial y_j}\\
+		&=g'(z_j)\sum_k\frac{\partial z_k}{\partial y_j}\cdot\frac{\partial E}{\partial z_k}\\
+		&=g'(z_j)\sum_kw_{jk}g'(z_k)\frac{\partial E}{\partial y_k}\\
+\intertext{\textbf{(c)}}
+		\frac{\partial E}{\partial w_{jk}} &= \frac{\partial z_k}{\partial w_{jk}}\cdot\frac{\partial E}{\partial z_k}\\
+		&=y_jg'(z_k)\frac{\partial E}{\partial y_k}\\
+\intertext{\textbf{(d)}}
+		\frac{\partial E}{\partial w_{ij}} &= \frac{\partial z_j}{\partial w_{ij}}\cdot\frac{\partial E}{\partial z_j}\\
+		&=y_ig'(z_j)\sum_kw_{jk}g'(z_k)\frac{\partial E}{\partial y_k}
+	\end{align*}
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
