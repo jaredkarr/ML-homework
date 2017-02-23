@@ -10,6 +10,8 @@
 \usepackage{epstopdf}
 
 \DeclareMathOperator{\given}{\mid}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
 
 \begin{document}
 
@@ -20,13 +22,43 @@ Jimmy Hold\"{o} & & Jared Karr\\
 890130-6319 & & 801120-4693\\
 \it{gusholji@student.gu.se} & & \it{karr@student.chalmers.se}\\
 \end{tabular*}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Theoretical problems}
-\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SVM}
 
-\subsection{}
-\section{Practical problems
-\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SVM cont'd}
+\paragraph{(a)}
+\begin{align*}
+  (\hat{w}_1,\hat{w}_2)
+  =\argmin_{(w_1,w_2)}w_1^2+w_2^2\tag*{subject to}
+\end{align*}
+\begin{alignat}{4}
+  2w_1 &+& 2w_2 &+& b &\ge& 1\label{eq:p1}\\
+  4w_1 &+& 4w_2 &+& b &\ge& 1\label{eq:p2}\\
+  4w_1 & &      &+& b &\ge& 1\label{eq:p3}\\
+       & &      & &-b &\ge& 1\label{eq:p4}\\
+ -2w_1 & &      & &-b &\ge& 1\label{eq:p5}\\
+       & &-2w_2 & &-b &\ge& 1\label{eq:p6}
+\end{alignat}
 
-\subsection{}
+\paragraph{(b)}
+Combine constraints
+\begin{align*}
+  2w_1&\ge2 & w_1&\ge1 \tag*{\eqref{eq:p1} and \eqref{eq:p6}}\\
+  2w_2&\ge2 & w_2&\ge1 \tag*{\eqref{eq:p1} and \eqref{eq:p5}}\\
+    -b&\ge3 &   b&\le-3 \tag*{\eqref{eq:p1}, \eqref{eq:p5} and \eqref{eq:p6}}
+\end{align*}
+The solution $\hat{w}_1=1, \hat{w}_2=1, \hat{b}-3$ satisfies the constraints \eqref{eq:p2}, \eqref{eq:p3} and \eqref{eq:p4}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Practical problems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SVM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kernels}
 \end{document}
