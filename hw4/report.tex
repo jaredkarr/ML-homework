@@ -33,8 +33,9 @@ Jimmy Hold\"{o} & & Jared Karr\\
 \paragraph{(a)}
 \begin{align*}
   (\hat{w}_1,\hat{w}_2)
-  =\argmin_{(w_1,w_2)}w_1^2+w_2^2\tag*{subject to}
+  =\argmin_{(w_1,w_2)}w_1^2+w_2^2
 \end{align*}
+subject to constraints
 \begin{alignat}{4}
   2w_1 &+& 2w_2 &+& b &\ge& 1\label{eq:p1}\\
   4w_1 &+& 4w_2 &+& b &\ge& 1\label{eq:p2}\\
@@ -52,6 +53,30 @@ Combine constraints
     -b&\ge3 &   b&\le-3 \tag*{\eqref{eq:p1}, \eqref{eq:p5} and \eqref{eq:p6}}
 \end{align*}
 The solution $\hat{w}_1=1, \hat{w}_2=1, \hat{b}-3$ satisfies the constraints \eqref{eq:p2}, \eqref{eq:p3} and \eqref{eq:p4}.
+
+\paragraph{(c)}
+\begin{multline*}
+  \hat{\boldsymbol{\alpha}}=
+  \argmax_{\boldsymbol{\alpha}}\sum_{n=1}^6\alpha_n
+    -4\alpha_1^2
+    -16\alpha_1\alpha_2
+    -8\alpha_1\alpha_3
+    +4\alpha_1\alpha_5
+    +4\alpha_1\alpha_6
+    -16\alpha_2^2\\
+    -16\alpha_2\alpha_3
+    +8\alpha_2\alpha_5
+    +8\alpha_2\alpha_6
+    -8\alpha_3^2
+    +8\alpha_3\alpha_5
+    -2\alpha_5^2
+    -2\alpha_6^2
+\end{multline*}
+subject to constraints
+\begin{align*}
+\alpha_1+\alpha_2+\alpha_3-\alpha_4-\alpha_5-\alpha_6=0,\qquad\alpha_n\ge0  
+\end{align*}
+\paragraph{(d)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
