@@ -80,6 +80,34 @@ subject to constraints
 \alpha_1+\alpha_2+\alpha_3-\alpha_4-\alpha_5-\alpha_6=0,\qquad\alpha_n\ge0
 \end{align*}
 \paragraph{(d)}
+Knowing that the solution will comprise three support vectors from the data on the margin, and that the remaining $\alpha_n$'s will be 0, we can reduce the dual formulation to, for example,
+\begin{align*}
+  \hat{\boldsymbol{\alpha}}=
+  \argmax_{\boldsymbol{\alpha}}\alpha_1+\alpha_5+\alpha_6
+    -4\alpha_1^2
+    +4\alpha_1\alpha_5
+    +4\alpha_1\alpha_6
+    -2\alpha_5^2
+    -2\alpha_6^2
+\end{align*}
+subject to
+\begin{align*}
+\alpha_1=\alpha_5+\alpha_6,\qquad\alpha_n>0
+\end{align*}
+where after substitution of the equality constraint, we have
+\begin{align*}
+  \hat{\boldsymbol{\alpha}}&=
+  \argmax_{\boldsymbol{\alpha}}2\alpha_5+2\alpha_6
+    -2\alpha_5^2
+    -2\alpha_6^2\\
+    &=
+    \argmax_{\boldsymbol{\alpha}}
+    \left(
+      -2(\alpha_5-\frac{1}{2})^2 - 2(\alpha_6-\frac{1}{2})^2
+    \right+1)
+\end{align*}
+giving the solution $(\alpha_1,\alpha_2,\alpha_3,\alpha_4,\alpha_5,\alpha_6)=(1,0,0,0,1/2,1/2)$. Repeating this with the other possible combinations of non-zero $\alpha_n$ gives a second solution $(\alpha_1,\alpha_2,\alpha_3,\alpha_4,\alpha_5,\alpha_6)=(1/2,0,1/2,0,1,0)$. It is therefore equivalent to use points 1, 5, 6 or points 1, 3, 5 as the support vectors. The other combinations 1, 3, 6 and 3, 5, 6 fail to produce the correct decision boundary with positive $\alpha$. The moments of the support vectors projected onto the decision boundary must balance.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Practical problems}
