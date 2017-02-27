@@ -27,7 +27,10 @@ Jimmy Hold\"{o} & & Jared Karr\\
 \section{Theoretical problems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{SVM}
-
+\includegraphics[width=\textwidth]{P1_1}
+\begin{align*}
+  2\gamma = 2\frac{\mid2\cdot1+2\cdot1-3\mid}{\sqrt{1^2+1^2}} = \sqrt{2}
+\end{align*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{SVM cont'd}
 \paragraph{(a)}
@@ -55,7 +58,7 @@ Combine constraints
 The solution $\hat{w}_1=1, \hat{w}_2=1, \hat{b}-3$ satisfies the constraints \eqref{eq:p2}, \eqref{eq:p3} and \eqref{eq:p4}.
 
 \paragraph{(c)}
-\begin{multline*}
+\begin{multline}
   \hat{\boldsymbol{\alpha}}=
   \argmax_{\boldsymbol{\alpha}}\sum_{n=1}^6\alpha_n
     -4\alpha_1^2
@@ -70,14 +73,49 @@ The solution $\hat{w}_1=1, \hat{w}_2=1, \hat{b}-3$ satisfies the constraints \eq
     -8\alpha_3^2
     +8\alpha_3\alpha_5
     -2\alpha_5^2
-    -2\alpha_6^2
-\end{multline*}
+    -2\alpha_6^2\label{eq:dual}
+\end{multline}
 subject to constraints
 \begin{align*}
-\alpha_1+\alpha_2+\alpha_3-\alpha_4-\alpha_5-\alpha_6=0,\qquad\alpha_n\ge0  
+\alpha_1+\alpha_2+\alpha_3-\alpha_4-\alpha_5-\alpha_6=0,\qquad\alpha_n\ge0
 \end{align*}
 \paragraph{(d)}
-
+Rewrite the constraint
+\begin{align*}
+  \alpha_4=\alpha_1+\alpha_2+\alpha_3-\alpha_5-\alpha_6
+\end{align*}
+and substitute into \eqref{eq:dual}, giving
+\begin{multline}
+  \hat{\boldsymbol{\alpha}}=
+  \argmax_{\boldsymbol{\alpha}}
+    2\alpha_1 + 2\alpha_2 + 2\alpha_3
+    -4\alpha_1^2
+    -16\alpha_1\alpha_2
+    -8\alpha_1\alpha_3\\
+    +4\alpha_1\alpha_5
+    +4\alpha_1\alpha_6
+    -16\alpha_2^2
+    -16\alpha_2\alpha_3
+    +8\alpha_2\alpha_5
+    +8\alpha_2\alpha_6\\
+    -8\alpha_3^2
+    +8\alpha_3\alpha_5
+    -2\alpha_5^2
+    -2\alpha_6^2.\label{eq:dual2}
+\end{multline}
+Taking the partial derivatives with respect to $\alpha_n$ gives the system of equations
+\begin{alignat*}{8}
+  \frac{\partial D}{\partial \alpha_1} &=&
+  2 &-&  8\alpha_1 &-& 16\alpha_2 &-&  8\alpha_3 &+& 4\alpha_5 &+& 4\alpha_6 &=& 0\\
+  \frac{\partial D}{\partial \alpha_2} &=&
+  2 &-& 16\alpha_1 &-& 32\alpha_2 &-& 16\alpha_3 &+& 8\alpha_5 &+& 8\alpha_6 &=& 0\\
+  \frac{\partial D}{\partial \alpha_3} &=&
+  2 &-&  8\alpha_1 &-& 16\alpha_2 &-& 16\alpha_3 &+& 8\alpha_5 & &           &=& 0\\
+  \frac{\partial D}{\partial \alpha_5} &=&
+    & &  4\alpha_1 &+&  8\alpha_2 &+&  8\alpha_3 &-& 4\alpha_5 & &           &=& 0\\
+  \frac{\partial D}{\partial \alpha_6} &=&
+    & &  4\alpha_1 &+&  8\alpha_2 & &            & &           &-& 4\alpha_6 &=& 0\\
+\end{alignat*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Practical problems}
